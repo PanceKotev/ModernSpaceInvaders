@@ -12,7 +12,7 @@ namespace MSpaceInvaders
 {
     public partial class Form1 : Form
     {
-
+        
         public Ship sh;
         Projectile p;
         Enemy en;

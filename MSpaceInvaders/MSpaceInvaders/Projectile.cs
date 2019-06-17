@@ -19,6 +19,8 @@ namespace MSpaceInvaders
         public Size size { get; set; }
         public bool exists { get; set; }
         public Projectile_Type Type { get; set; }
+        public bool Friendly { get; set; }
+
         public Projectile(Point s)
         {
             Type = Projectile_Type.NORMAL;
@@ -26,6 +28,7 @@ namespace MSpaceInvaders
             size = new Size(10,10);
             start = s;
             exists = true;
+            Friendly = false;
         }
         public void Draw(Graphics g)
         {
