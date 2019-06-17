@@ -23,11 +23,27 @@ namespace MSpaceInvaders
         {
             //Comment
             sh= new Ship(Size.Width / 2, Size.Height-80);
+           
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             sh.Draw(e.Graphics);
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                sh.Move(0);
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                sh.Move(1);
+            }
+            Invalidate();
+        }
+
+    
     }
 }
