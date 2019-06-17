@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\baoyzx---space-ship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enemy_ship.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

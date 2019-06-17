@@ -34,8 +34,8 @@ namespace MSpaceInvaders
             g.FillRectangle(b,start.X-size.Width/2,start.Y,size.Width,size.Height);
             else
             {
-                g.FillRectangle(b, start.X - ((size.Width / 2)+5), start.Y, size.Width, size.Height);
-                g.FillRectangle(b, start.X - ((size.Width / 2) - 5), start.Y, size.Width, size.Height);
+                g.FillRectangle(b, start.X - ((size.Width / 2)+10), start.Y, size.Width, size.Height);
+                g.FillRectangle(b, start.X - ((size.Width / 2) - 10), start.Y, size.Width, size.Height);
             }
         }
         public void Move(int height)
