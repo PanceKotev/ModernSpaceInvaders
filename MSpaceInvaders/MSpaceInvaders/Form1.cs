@@ -76,6 +76,7 @@ namespace MSpaceInvaders
                     MessageBox.Show("It hit");
                 
             }
+
             Invalidate(true);
             
         }
@@ -90,7 +91,7 @@ namespace MSpaceInvaders
             if (en.projectile!=null)
             en.projMove(this.Bounds.Height);
             i++;
-      
+            
             Invalidate(true);
         }
     }

@@ -22,6 +22,7 @@ namespace MSpaceInvaders
         public int speed { get; set; }
         private static Random rand = new Random();
         public int random { get; set; }
+        public bool isDead { get; set; }
 
         public Enemy(Point loc)
         {
@@ -30,6 +31,7 @@ namespace MSpaceInvaders
             image = Properties.Resources.enemy_ship;
             projectile = null;
             random = rand.Next(50, 200);
+            isDead = false;
 
         }
         public void Draw(Graphics g)
