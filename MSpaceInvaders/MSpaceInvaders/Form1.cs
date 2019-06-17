@@ -12,6 +12,8 @@ namespace MSpaceInvaders
 {
     public partial class Form1 : Form
     {
+
+        public Ship sh;
         public Form1()
         {
             InitializeComponent();
@@ -20,6 +22,12 @@ namespace MSpaceInvaders
         private void Form1_Load(object sender, EventArgs e)
         {
             //Comment
+            sh= new Ship(Size.Width / 2, Size.Height-80);
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            sh.Draw(e.Graphics);
         }
     }
 }
