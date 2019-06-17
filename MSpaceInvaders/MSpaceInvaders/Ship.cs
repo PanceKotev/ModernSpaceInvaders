@@ -29,9 +29,9 @@ namespace MSpaceInvaders
         public void Move(int State)
         {
             if (State == 0)
-                X -= 20;
+                X =X- 20;
             else
-                X += 20;
+                X = X+20;
         }
     }
 }
