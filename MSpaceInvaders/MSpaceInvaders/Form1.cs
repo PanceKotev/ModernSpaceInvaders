@@ -16,18 +16,12 @@ namespace MSpaceInvaders
         public Ship sh;
         Projectile p;
         Enemy en;
-        private static Random rand;
-        int i = 0;
-        int rr = -1;
-       
-
+        int time = 0;
         public Form1()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            rand = new Random();
-           
-                
+
 
         }
 
@@ -37,7 +31,6 @@ namespace MSpaceInvaders
             sh= new Ship(Size.Width / 2, Size.Height-80);
             en = new Enemy(new Point(23,60));
             timer1.Start();
-            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -60,7 +53,7 @@ namespace MSpaceInvaders
             }
             if (e.KeyCode == Keys.Space)
             {
-                p = new Projectile(new Point(sh.X+sh.Img.Size.Width/2, sh.Y-20),false);
+                p = new Projectile(new Point(sh.X+sh.Img.Size.Width/2, sh.Y-20));
                 p.Type = Projectile_Type.NORMAL;
             }
             Invalidate(true);
@@ -68,35 +61,33 @@ namespace MSpaceInvaders
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-             
             if (p != null)
             {
                 if (!p.exists)
                 {
                     p = null;
-
+                    
                 }
                 else
-                {
-                 
-                    p.Move(this.Height);
-                }
+                p.Move(this.Bounds.Height,true);
                 if (en.isHit(p))
                     MessageBox.Show("It hit");
                 
             }
-            if (i > rr)
-            {
-                en.projectile = new Projectile(new Point(en.location.X + 20, en.location.Y + 20), true);
-           rr = rand.Next(50,200);
-                i = 0;
-            }
-            en.projectile.Move(this.Height);
-
-            i++;
-
             Invalidate(true);
             
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (time % 50 == 0)
+            {
+                en.Fire();
+            }
+            else
+                en.projMove(this.Bounds.Height);
+            time++;
+            Invalidate(true);
         }
     }
 }
