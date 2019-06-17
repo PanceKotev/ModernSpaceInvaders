@@ -16,13 +16,19 @@ namespace MSpaceInvaders
         public int speed { get; set; }
         public Enemy(Point loc)
         {
+            size = new Size(40, 40);
             location = loc;
             image = Properties.Resources.enemy_ship;
             projectile = null;
         }
         public void Draw(Graphics g)
         {
-            g.DrawImage(image, location.X, location.Y, 40, 40);
+            g.DrawImage(image, location.X, location.Y, size.Width,size.Height);
         }
+        public bool isHit(Projectile p)
+        {
+            return (p.start.X-p.size.Width/2 >= location.X && p.start.X-p.size.Width / 2 <= location.X + size.Width && p.start.Y >= location.Y+10 && p.start.Y <= location.Y + size.Height-17);
+        }
+
     }
 }

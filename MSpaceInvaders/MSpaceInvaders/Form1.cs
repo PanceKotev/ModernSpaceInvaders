@@ -34,8 +34,8 @@ namespace MSpaceInvaders
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             sh.Draw(e.Graphics);
-            if (p != null)
-                p.Draw(e.Graphics);
+            if (p != null) 
+                p.Draw(e.Graphics); 
             en.Draw(e.Graphics);
         }
 
@@ -68,6 +68,8 @@ namespace MSpaceInvaders
                 }
                 else
                 p.Move(this.Height);
+                if (en.isHit(p))
+                    MessageBox.Show("It hit");
                 
             }
             Invalidate(true);
