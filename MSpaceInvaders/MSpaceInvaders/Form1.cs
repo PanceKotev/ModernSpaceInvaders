@@ -16,10 +16,12 @@ namespace MSpaceInvaders
         public Ship sh;
         Projectile p;
         Enemy en;
+        int time = 0;
         public Form1()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
+
 
         }
 
@@ -67,13 +69,25 @@ namespace MSpaceInvaders
                     
                 }
                 else
-                p.Move(this.Height);
+                p.Move(this.Bounds.Height,true);
                 if (en.isHit(p))
                     MessageBox.Show("It hit");
                 
             }
             Invalidate(true);
             
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (time % 50 == 0)
+            {
+                en.Fire();
+            }
+            else
+                en.projMove(this.Bounds.Height);
+            time++;
+            Invalidate(true);
         }
     }
 }

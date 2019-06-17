@@ -38,15 +38,16 @@ namespace MSpaceInvaders
                 g.FillRectangle(b, start.X - ((size.Width / 2) - 10), start.Y, size.Width, size.Height);
             }
         }
-        public void Move(int height)
+        public void Move(int height,bool up)
         {
-            if (start.Y + size.Height > height)
+            if (up)
             {
-                exists = false;
+                if (start.Y - size.Height <= height)
+                    exists = true;
+                    start = new Point(start.X, start.Y - speed);
             }
-            else
-            {
-                start = new Point(start.X, start.Y - speed);
+            else {
+                start = new Point(start.X, start.Y + speed);
             }
         }
     }
