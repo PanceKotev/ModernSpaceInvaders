@@ -24,6 +24,8 @@ namespace MSpaceInvaders
         public void Draw(Graphics g)
         {
             g.DrawImage(image, location.X, location.Y, size.Width,size.Height);
+            if (projectile!=null)
+            projectile.Draw(g);
         }
         public bool isHit(Projectile p)
         {

@@ -33,5 +33,10 @@ namespace MSpaceInvaders
             else
                 X = X+20;
         }
+
+        public bool isHit(Projectile p)
+        {
+            return (p.start.X - p.size.Width / 2 >= X && p.start.X - p.size.Width / 2 <= X + 40 && p.start.Y >= Y + 10 && p.start.Y <=Y + 30 - 17);
+        }
     }
 }
