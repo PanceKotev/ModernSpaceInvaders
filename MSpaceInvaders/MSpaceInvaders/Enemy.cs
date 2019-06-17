@@ -20,12 +20,17 @@ namespace MSpaceInvaders
         public Projectile projectile { get; set; }
         public Size size { get; set; }
         public int speed { get; set; }
+        private static Random rand = new Random();
+        public int random { get; set; }
+
         public Enemy(Point loc)
         {
             size = new Size(40, 40);
             location = loc;
             image = Properties.Resources.enemy_ship;
             projectile = null;
+            random = rand.Next(50, 200);
+
         }
         public void Draw(Graphics g)
         {

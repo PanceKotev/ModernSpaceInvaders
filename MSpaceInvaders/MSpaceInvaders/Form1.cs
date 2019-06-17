@@ -16,7 +16,9 @@ namespace MSpaceInvaders
         public Ship sh;
         Projectile p;
         Enemy en;
-        int time = 0;
+        int i = 0;
+        private static Random rand = new Random();
+        int rr = rand.Next(50,200);
         public Form1()
         {
             InitializeComponent();
@@ -80,13 +82,15 @@ namespace MSpaceInvaders
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (time % 50 == 0)
+            if (i % en.random==0)
             {
                 en.Fire();
+                en.random = rand.Next(50, 200);
             }
-            else
-                en.projMove(this.Bounds.Height);
-            time++;
+            if (en.projectile!=null)
+            en.projMove(this.Bounds.Height);
+            i++;
+      
             Invalidate(true);
         }
     }
