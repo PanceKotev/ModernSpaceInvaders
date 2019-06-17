@@ -19,24 +19,32 @@ namespace MSpaceInvaders
         public Size size { get; set; }
         public bool exists { get; set; }
         public Projectile_Type Type { get; set; }
-        public Projectile(Point s)
+        public bool friendly { get; set; }
+        public Projectile(Point s,bool f)
         {
             Type = Projectile_Type.NORMAL;
             speed = 10;
             size = new Size(10,10);
             start = s;
             exists = true;
+            friendly = f;
+
         }
         public void Draw(Graphics g)
         {
-            Brush b = new SolidBrush(Color.Red);
-            if(Type==Projectile_Type.NORMAL)
+            Brush b;
+            if (friendly)
+             b = new SolidBrush(Color.Green);
+            else
+                b = new SolidBrush(Color.Red);
+            if (Type==Projectile_Type.NORMAL)
             g.FillRectangle(b,start.X-size.Width/2,start.Y,size.Width,size.Height);
             else
             {
                 g.FillRectangle(b, start.X - ((size.Width / 2)+10), start.Y, size.Width, size.Height);
                 g.FillRectangle(b, start.X - ((size.Width / 2) - 10), start.Y, size.Width, size.Height);
             }
+            b.Dispose();
         }
         public void Move(int height,bool up)
         {

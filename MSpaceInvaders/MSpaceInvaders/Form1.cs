@@ -55,7 +55,7 @@ namespace MSpaceInvaders
             }
             if (e.KeyCode == Keys.Space)
             {
-                p = new Projectile(new Point(sh.X+sh.Img.Size.Width/2, sh.Y-20));
+                p = new Projectile(new Point(sh.X+sh.Img.Size.Width/2, sh.Y-20),true);
                 p.Type = Projectile_Type.NORMAL;
             }
             Invalidate(true);
