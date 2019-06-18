@@ -35,9 +35,10 @@ namespace MSpaceInvaders
         }
         public void shipHit()
         {
-            bool flag = false;
+            
             for (int i = 0; i < 5; i++)
             {
+                bool flag = false;
                 for(int j = 0; j < 3; j++)
                 {
                     if (enemies[i, j].isHit(player))
@@ -79,6 +80,14 @@ namespace MSpaceInvaders
                         break;
                 }
             }
+        }
+        public void Draw(Graphics g)
+        {
+
+
+
+
+
         }
         
 
