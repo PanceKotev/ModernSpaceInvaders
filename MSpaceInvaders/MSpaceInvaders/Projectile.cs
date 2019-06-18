@@ -17,7 +17,6 @@ namespace MSpaceInvaders
         public Point start { get; set; }
         public int speed { get; set; }
         public Size size { get; set; }
-        public bool exists { get; set; }
         public Projectile_Type Type { get; set; }
         public bool Friendly { get; set; }
 
@@ -27,7 +26,6 @@ namespace MSpaceInvaders
             speed = 10;
             size = new Size(10,10);
             start = s;
-            exists = true;
             Friendly = f;
         }
         public void Draw(Graphics g)
@@ -45,13 +43,11 @@ namespace MSpaceInvaders
                 g.FillRectangle(b, start.X - ((size.Width / 2) - 10), start.Y, size.Width, size.Height);
             }
         }
-        public void Move(int height,bool up)
+        public void Move(bool up)
         {
             if (up)
             {
-                if (start.Y - size.Height <= height)
-                    exists = true;
-                    start = new Point(start.X, start.Y - speed);
+              start = new Point(start.X, start.Y - speed);
             }
             else {
                 start = new Point(start.X, start.Y + speed);

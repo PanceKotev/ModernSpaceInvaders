@@ -23,7 +23,10 @@ namespace MSpaceInvaders
         private static Random rand = new Random();
         public int random { get; set; }
         public bool isDead { get; set; }
-
+        public Enemy()
+        {
+            isDead = false;
+        }
         public Enemy(Point loc)
         {
             size = new Size(40, 40);
@@ -51,11 +54,12 @@ namespace MSpaceInvaders
             else if (dir == Direction.LEFT)
                 location = new Point(location.X - size.Width / 2, location.Y);
             else
-                location = new Point(location.X, location.Y - size.Height);
+                location = new Point(location.X, location.Y + size.Height/3);
         }
         public bool isHit(Ship s)
         {
-            return (s.X -20 >= location.X && s.X - 20 <= location.X + size.Width && s.Y >= location.Y + 10 && s.Y <= location.Y + size.Height - 17);
+            
+            return (s.X -20 >= location.X && s.X - 20 <= location.X + size.Width && s.Y >= location.Y + 10 && s.Y <= location.Y + size.Height - 17 && !isDead);
         }
         public void Fire()
         {
@@ -71,7 +75,7 @@ namespace MSpaceInvaders
                 }
                 else
                 {
-                    projectile.Move(height, false);
+                    projectile.Move(false);
                 }
             }
 

@@ -17,11 +17,13 @@ namespace MSpaceInvaders
         Projectile p;
         Enemy en;
         int i = 0;
+        Game igra;
         private static Random rand = new Random();
         int rr = rand.Next(50,200);
         public Form1()
         {
             InitializeComponent();
+            igra = new Game(this.Bounds.Width, this.Bounds.Height);
             this.DoubleBuffered = true;
 
 
@@ -37,53 +39,64 @@ namespace MSpaceInvaders
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            sh.Draw(e.Graphics);
-            if (p != null) 
-                p.Draw(e.Graphics); 
-            en.Draw(e.Graphics);
+            /*  sh.Draw(e.Graphics);
+              if (p != null) 
+                  p.Draw(e.Graphics); 
+              en.Draw(e.Graphics);*/
+            igra.Draw(e.Graphics);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
             {
-                sh.Move(0);
+                igra.player.Move(0);
             }
             if (e.KeyCode == Keys.Right)
             {
-                sh.Move(1);
+                igra.player.Move(1);
             }
             if (e.KeyCode == Keys.Space)
             {
-                p = new Projectile(new Point(sh.X+sh.Img.Size.Width/2, sh.Y-20),true);
-                p.Type = Projectile_Type.NORMAL;
+                igra.Shoot();
             }
             Invalidate(true);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (p != null)
-            {
-                if (!p.exists)
-                {
-                    p = null;
-                    
-                }
-                else
-                p.Move(this.Bounds.Height,true);
-                if (en.isHit(p))
-                    MessageBox.Show("It hit");
-                
-            }
+            /*  if (p != null)
+              {
+                  if (!p.exists)
+                  {
+                      p = null;
 
+                  }
+                  else
+                  p.Move(true);
+                  if (en.isHit(p))
+                      MessageBox.Show("It hit");
+
+              }
+              */
+            if (igra.GameOver == true)
+            {
+                igra = new Game(this.Bounds.Width, this.Bounds.Height);
+            }
+            else
+            {
+                igra.moveProjectiles();
+                igra.updateDir();
+                igra.enemyHit();
+                igra.shipHit();
+            }
             Invalidate(true);
             
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (i % en.random==0)
+          /*  if (i % en.random==0)
             {
                 en.Fire();
                 en.random = rand.Next(50, 200);
@@ -91,7 +104,14 @@ namespace MSpaceInvaders
             if (en.projectile!=null)
             en.projMove(this.Bounds.Height);
             i++;
-            
+            */
+
+            Invalidate(true);
+        }
+
+        private void enemyMovement_Tick(object sender, EventArgs e)
+        {
+            igra.moveEnemies();
             Invalidate(true);
         }
     }
