@@ -63,6 +63,7 @@ namespace MSpaceInvaders
         }
         public void Fire()
         {
+            if(!isDead)
             projectile = new Projectile(new Point(location.X + size.Width / 2, location.Y + size.Height + 20),false);
         }
         public void projMove(int height)

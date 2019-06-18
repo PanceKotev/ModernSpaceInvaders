@@ -13,10 +13,7 @@ namespace MSpaceInvaders
     public partial class Form1 : Form
     {
         
-        public Ship sh;
-        Projectile p;
-        Enemy en;
-        int i = 0;
+        int i = 1;
         Game igra;
         private static Random rand = new Random();
         int rr = rand.Next(50,200);
@@ -32,8 +29,6 @@ namespace MSpaceInvaders
         private void Form1_Load(object sender, EventArgs e)
         {
             //Comment
-            sh= new Ship(Size.Width / 2, Size.Height-80);
-            en = new Enemy(new Point(23,60));
             timer1.Start();
         }
 
@@ -86,6 +81,7 @@ namespace MSpaceInvaders
             else
             {
                 igra.moveProjectiles();
+                igra.enemyMoveProj();
                 igra.updateDir();
                 igra.enemyHit();
                 igra.shipHit();
@@ -96,15 +92,19 @@ namespace MSpaceInvaders
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-          /*  if (i % en.random==0)
-            {
-                en.Fire();
-                en.random = rand.Next(50, 200);
+            for(int j = 0; j < igra.columns; j++) {
+                for(int k = 0; k < igra.rows; k++)
+                {
+                    Enemy en = igra.enemies[j, k];
+                    if (i % en.random == 0)
+                    {
+                        en.Fire();
+                        en.random = rand.Next(50, 200);
+                    }
+                }
             }
-            if (en.projectile!=null)
-            en.projMove(this.Bounds.Height);
             i++;
-            */
+            
 
             Invalidate(true);
         }

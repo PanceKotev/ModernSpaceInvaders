@@ -44,8 +44,11 @@ namespace MSpaceInvaders
         }
         public void Shoot()
         {
-            Projectile p = new Projectile(new Point(player.X + 20, player.Y - 10), true);
-            firedP.Add(p);
+            if (firedP.Count < 3)
+            {
+                Projectile p = new Projectile(new Point(player.X + 20, player.Y - 10), true);
+                firedP.Add(p);
+            }
         }
         public void shipHit()
         {
@@ -186,6 +189,21 @@ namespace MSpaceInvaders
                 }
             }
         }
+        public void enemyMoveProj()
+        {
+            for(int i = 0; i < columns; i++)
+            {
+                Enemy en;
+                for (int j = 0; j < rows; j++)
+                {
+                    en = enemies[i, j];
+                    if (en.projectile != null)
+                        en.projMove(Height);
+                }
+            }
+           
+        }
+
 
      
         
