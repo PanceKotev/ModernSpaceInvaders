@@ -117,23 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="enemy_ship" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enemy_ship.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Space_Ship" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\baoyzx---space-ship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Space" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Space.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Space2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Space2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SpaceGame" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SpaceGame.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SpaceGame2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SpaceGame2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Za kontrola na pilotot se koristat 
+strelkite za levo i desno. 
+Proektili se ispukuvaat koga kje se 
+pritisne space
+ i se unishtuvaat protivnickite brodovi.
+ Protivnickite brodovi isto taka 
+ispukuvaat proektili i ako te 
+pogodat zavrsuva igrata.</value>
   </data>
 </root>
