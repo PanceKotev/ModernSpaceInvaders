@@ -121,5 +121,20 @@
   <ItemGroup>
     <None Include="Resources\SpaceGame2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\starry-sky-night.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level2_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level1_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_bg1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level3_bg.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

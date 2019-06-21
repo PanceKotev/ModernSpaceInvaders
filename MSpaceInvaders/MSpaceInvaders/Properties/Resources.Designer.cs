@@ -73,6 +73,46 @@ namespace MSpaceInvaders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap level1_bg {
+            get {
+                object obj = ResourceManager.GetObject("level1_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap level2_bg {
+            get {
+                object obj = ResourceManager.GetObject("level2_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap level3_bg {
+            get {
+                object obj = ResourceManager.GetObject("level3_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_bg1 {
+            get {
+                object obj = ResourceManager.GetObject("menu_bg1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Space {
             get {
                 object obj = ResourceManager.GetObject("Space", resourceCulture);
@@ -116,6 +156,16 @@ namespace MSpaceInvaders.Properties {
         internal static System.Drawing.Bitmap SpaceGame2 {
             get {
                 object obj = ResourceManager.GetObject("SpaceGame2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap starry_sky_night {
+            get {
+                object obj = ResourceManager.GetObject("starry_sky_night", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

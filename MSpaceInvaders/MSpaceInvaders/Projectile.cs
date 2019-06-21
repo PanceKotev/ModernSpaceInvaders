@@ -25,7 +25,7 @@ namespace MSpaceInvaders
         {
             Type = Projectile_Type.NORMAL;
             speed = 10;
-            size = new Size(10,10);
+            size = new Size(7,7);
             start = s;
             bounds = new Rectangle(start, size);
             Friendly = f;

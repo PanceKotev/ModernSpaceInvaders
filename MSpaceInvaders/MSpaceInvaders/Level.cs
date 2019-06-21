@@ -39,7 +39,7 @@ namespace MSpaceInvaders
             }
             else if (lvl == 2)
             {
-                background = Properties.Resources.SpaceGame2;
+                background = Properties.Resources.Space2;
                 columns = 6;
                 rows = 4;
                 enemyDirection = Direction.RIGHT;
@@ -54,6 +54,7 @@ namespace MSpaceInvaders
 
                 }
             }
+            
         }
         public void Draw(Graphics g)
         {
