@@ -23,6 +23,9 @@ namespace MSpaceInvaders
         private static Random rand = new Random();
         public int random { get; set; }
         public bool isDead { get; set; }
+        public Rectangle bounds { get; set; }
+        public int velocityX { get; set; }
+        public int velocityY { get; set; }
         public Enemy()
         {
             isDead = false;
@@ -31,6 +34,9 @@ namespace MSpaceInvaders
         {
             size = new Size(40, 40);
             location = loc;
+            bounds = new Rectangle(loc, size);
+            velocityX = size.Width / 3;
+            velocityY = size.Height / 3;
             image = Properties.Resources.enemy_ship;
             projectile = null;
             random = rand.Next(50, 200);
@@ -45,32 +51,41 @@ namespace MSpaceInvaders
         }
         public bool isHit(Projectile p)
         {
-            return (p.start.X-p.size.Width/2 >= location.X && p.start.X-p.size.Width / 2 <= location.X + size.Width && p.start.Y >= location.Y+10 && p.start.Y <= location.Y + size.Height-17);
+            
+            return (bounds.IntersectsWith(p.bounds) && !isDead);
         }
         public void Move(Direction dir)
         {
             if (dir == Direction.RIGHT)
-                location = new Point(location.X + size.Width / 2, location.Y);
+            {
+                location = new Point(location.X + velocityX, location.Y);
+                bounds = new Rectangle(location, size);
+            }
             else if (dir == Direction.LEFT)
-                location = new Point(location.X - size.Width / 2, location.Y);
+            {
+                location = new Point(location.X - velocityX, location.Y);
+                bounds = new Rectangle(location, size);
+            }
             else
-                location = new Point(location.X, location.Y + size.Height/3);
+            {
+                location = new Point(location.X, location.Y + velocityY);
+                bounds = new Rectangle(location, size);
+            }
         }
         public bool isHit(Ship s)
         {
-            
-            return (s.X -20 >= location.X && s.X - 20 <= location.X + size.Width && s.Y >= location.Y + 10 && s.Y <= location.Y + size.Height - 17 && !isDead);
+            return (bounds.IntersectsWith(s.bounds) && !isDead);
         }
         public void Fire()
         {
             if(!isDead)
-            projectile = new Projectile(new Point(location.X + size.Width / 2, location.Y + size.Height + 20),false);
+            projectile = new Projectile(new Point(location.X + size.Width / 2, location.Y + size.Height + size.Height/3),false);
         }
         public void projMove(int height)
         {
             if (projectile != null)
             {
-                if (projectile.start.Y + projectile.size.Height >= height)
+                if (projectile.start.Y + projectile.size.Height >= height-projectile.speed)
                 {
                     projectile = null;
                 }

@@ -43,11 +43,11 @@ namespace MSpaceInvaders
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left && !(igra.player.X-igra.player.size.Width<=0-igra.player.size.Width/2))
             {
                 igra.player.Move(0);
             }
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right && !(igra.player.X+igra.player.size.Width >= this.Bounds.Width-igra.player.size.Width/2))
             {
                 igra.player.Move(1);
             }
@@ -80,11 +80,7 @@ namespace MSpaceInvaders
             }
             else
             {
-                igra.moveProjectiles();
-                igra.enemyMoveProj();
-                igra.updateDir();
-                igra.enemyHit();
-                igra.shipHit();
+                igra.Update();
             }
             Invalidate(true);
             
@@ -95,7 +91,7 @@ namespace MSpaceInvaders
             for(int j = 0; j < igra.columns; j++) {
                 for(int k = 0; k < igra.rows; k++)
                 {
-                    Enemy en = igra.enemies[j, k];
+                    Enemy en = igra.levels[igra.CurrentLevel].enemies[j, k];
                     if (i % en.random == 0)
                     {
                         en.Fire();
@@ -111,8 +107,13 @@ namespace MSpaceInvaders
 
         private void enemyMovement_Tick(object sender, EventArgs e)
         {
-            igra.moveEnemies();
+            igra.levels[igra.CurrentLevel].moveEnemies();
             Invalidate(true);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

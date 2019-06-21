@@ -26,14 +26,25 @@ namespace MSpaceInvaders
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //
             ControlsForm form = new ControlsForm();
             form.Show();
             this.Hide();
+        }
+
+        private void button3_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void StartForm_Leave(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

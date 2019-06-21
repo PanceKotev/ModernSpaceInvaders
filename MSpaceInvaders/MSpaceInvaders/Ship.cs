@@ -13,30 +13,40 @@ namespace MSpaceInvaders
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public Size size { get; set; }
+        public Rectangle bounds { get; set; }
         public Image Img = Properties.Resources.Space_Ship;
 
         public Ship(int x, int y)
         {
             X = x;
             Y = y;
+            size = new Size(40, 40);
+            bounds = new Rectangle(new Point(X, Y), size);
         }
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(Img, X, Y);
+            g.DrawImage(Img, X, Y,size.Width,size.Height);
         }
 
         public void Move(int State)
         {
             if (State == 0)
-                X =X- 20;
+            {
+                X = X - 20;
+                bounds = new Rectangle(new Point(X, Y), size);
+            }
             else
-                X = X+20;
+            {
+                X = X + 20;
+                bounds = new Rectangle(new Point(X, Y), size);
+            }
         }
 
         public bool isHit(Projectile p)
         {
-            return (p.start.X - p.size.Width / 2 >= X && p.start.X - p.size.Width / 2 <= X + 40 && p.start.Y >= Y + 10 && p.start.Y <=Y + 30 - 17);
+            return (bounds.IntersectsWith(p.bounds)&&p!=null);
         }
     }
 }

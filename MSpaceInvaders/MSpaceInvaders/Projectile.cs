@@ -19,6 +19,7 @@ namespace MSpaceInvaders
         public Size size { get; set; }
         public Projectile_Type Type { get; set; }
         public bool Friendly { get; set; }
+        public Rectangle bounds { get; set; }
 
         public Projectile(Point s,bool f)
         {
@@ -26,6 +27,7 @@ namespace MSpaceInvaders
             speed = 10;
             size = new Size(10,10);
             start = s;
+            bounds = new Rectangle(start, size);
             Friendly = f;
         }
         public void Draw(Graphics g)
@@ -36,7 +38,7 @@ namespace MSpaceInvaders
             else
                 b = new SolidBrush(Color.Red);
             if (Type==Projectile_Type.NORMAL)
-            g.FillRectangle(b,start.X-size.Width/2,start.Y,size.Width,size.Height);
+            g.FillRectangle(b,start.X,start.Y,size.Width,size.Height);
             else
             {
                 g.FillRectangle(b, start.X - ((size.Width / 2)+10), start.Y, size.Width, size.Height);
@@ -48,9 +50,11 @@ namespace MSpaceInvaders
             if (up)
             {
               start = new Point(start.X, start.Y - speed);
+                bounds = new Rectangle(start, size);
             }
             else {
                 start = new Point(start.X, start.Y + speed);
+                bounds = new Rectangle(start, size);
             }
         }
     }
