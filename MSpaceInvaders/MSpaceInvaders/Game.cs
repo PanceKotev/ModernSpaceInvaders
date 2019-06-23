@@ -30,7 +30,7 @@ namespace MSpaceInvaders
             levels = new List<Level>();
             levels.Add(new Level(Width, Height, 1));
             levels.Add(new Level(Width, Height, 2));
-            nbrBullets = 3;
+            nbrBullets = 1;
 
             columns = levels[CurrentLevel].columns;
             rows = levels[CurrentLevel].rows;
@@ -204,6 +204,7 @@ namespace MSpaceInvaders
                 if (levels[CurrentLevel].allDead())
                 {
                     CurrentLevel++;
+                    firedP.Clear();
                     columns = levels[CurrentLevel].columns;
                     rows = levels[CurrentLevel].rows;
                 }

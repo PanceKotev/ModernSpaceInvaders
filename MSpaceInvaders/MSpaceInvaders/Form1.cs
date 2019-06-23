@@ -43,13 +43,15 @@ namespace MSpaceInvaders
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left && !(igra.player.X-igra.player.size.Width<=0-igra.player.size.Width/2))
+            if (e.KeyCode == Keys.Left)
             {
-                igra.player.Move(0);
+                //  igra.player.Move(0);
+                mvLeft.Start();
             }
-            if (e.KeyCode == Keys.Right && !(igra.player.X+igra.player.size.Width >= this.Bounds.Width-igra.player.size.Width/2))
+            if (e.KeyCode == Keys.Right)
             {
-                igra.player.Move(1);
+                //igra.player.Move(1);
+                mvRight.Start();
             }
             if (e.KeyCode == Keys.Space)
             {
@@ -114,6 +116,28 @@ namespace MSpaceInvaders
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void mvRight_Tick(object sender, EventArgs e)
+        {
+            igra.player.Move(1,this.Bounds.Width);
+        }
+
+        private void mvLeft_Tick(object sender, EventArgs e)
+        {
+            igra.player.Move(0,this.Bounds.Width);
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right)
+            {
+                mvRight.Stop();
+            }
+            else if(e.KeyCode == Keys.Left)
+            {
+                mvLeft.Stop();
+            }
         }
     }
 }

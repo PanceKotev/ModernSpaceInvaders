@@ -30,14 +30,14 @@ namespace MSpaceInvaders
             g.DrawImage(Img, X, Y,size.Width,size.Height);
         }
 
-        public void Move(int State)
+        public void Move(int State, int Width)
         {
-            if (State == 0)
+            if (State == 0 && !(X - size.Width <= 0 - size.Width / 2))
             {
                 X = X - 20;
                 bounds = new Rectangle(new Point(X, Y), size);
             }
-            else
+            else if(State == 1 && !(X + size.Width >= Width - size.Width / 2))
             {
                 X = X + 20;
                 bounds = new Rectangle(new Point(X, Y), size);

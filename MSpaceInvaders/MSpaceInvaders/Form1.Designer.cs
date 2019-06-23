@@ -32,6 +32,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.enemyMovement = new System.Windows.Forms.Timer(this.components);
+            this.mvLeft = new System.Windows.Forms.Timer(this.components);
+            this.mvRight = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // timer1
@@ -51,6 +53,16 @@
             this.enemyMovement.Interval = 300;
             this.enemyMovement.Tick += new System.EventHandler(this.enemyMovement_Tick);
             // 
+            // mvLeft
+            // 
+            this.mvLeft.Interval = 50;
+            this.mvLeft.Tick += new System.EventHandler(this.mvLeft_Tick);
+            // 
+            // mvRight
+            // 
+            this.mvRight.Interval = 50;
+            this.mvRight.Tick += new System.EventHandler(this.mvRight_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -64,6 +76,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
 
         }
@@ -73,6 +86,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer enemyMovement;
+        private System.Windows.Forms.Timer mvLeft;
+        private System.Windows.Forms.Timer mvRight;
     }
 }
 
