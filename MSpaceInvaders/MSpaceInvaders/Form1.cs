@@ -20,7 +20,7 @@ namespace MSpaceInvaders
         public Form1()
         {
             InitializeComponent();
-            igra = new Game(this.Bounds.Width, this.Bounds.Height);
+            
             this.DoubleBuffered = true;
 
 
@@ -29,6 +29,10 @@ namespace MSpaceInvaders
         private void Form1_Load(object sender, EventArgs e)
         {
             //Comment
+            
+            igra = new Game(this.Bounds.Width, this.Bounds.Height);
+            pictureBox1.Location = new Point(10, this.Bounds.Height - pictureBox1.Size.Height * 3);
+            label1.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y - pictureBox1.Height / 2 + label1.Size.Height);
             timer1.Start();
         }
 
@@ -59,7 +63,11 @@ namespace MSpaceInvaders
             }
             Invalidate(true);
         }
+        public void changeL()
+        {
+            this.BackgroundImage = igra.levels[igra.CurrentLevel].background;
 
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             /*  if (p != null)
@@ -78,11 +86,15 @@ namespace MSpaceInvaders
               */
             if (igra.GameOver == true)
             {
+                
                 igra = new Game(this.Bounds.Width, this.Bounds.Height);
+                this.BackgroundImage = igra.levels[0].background;
+                label1.Text = "x" + igra.lives.ToString();
             }
             else
             {
                 igra.Update();
+                label1.Text = "x" + igra.lives.ToString();
             }
             Invalidate(true);
             
@@ -94,7 +106,7 @@ namespace MSpaceInvaders
                 for(int k = 0; k < igra.rows; k++)
                 {
                     Enemy en = igra.levels[igra.CurrentLevel].enemies[j, k];
-                    if (i % en.random == 0)
+                    if (i % en.random == 0 && en.projectile==null)
                     {
                         en.Fire();
                         en.random = rand.Next(50, 200);

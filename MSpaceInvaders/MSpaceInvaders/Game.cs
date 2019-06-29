@@ -20,11 +20,15 @@ namespace MSpaceInvaders
         public int rows { get; set; }
         public int CurrentLevel { get; set; }
         public int nbrBullets { get; set; }
+        public int lives { get; set; }
         public List<Level> levels { get; set; }
+
         Direction enemyDirection { get; set; }
         public Game(int width,int height)
         {
             CurrentLevel = 0;
+            lives = 3;
+            
             Width = width;
             Height = height;
             levels = new List<Level>();
@@ -70,17 +74,28 @@ namespace MSpaceInvaders
                     bool flag = false;
                     for (int j = 0; j < rows; j++)
                     {
-                        if (levels[CurrentLevel].enemies[i, j].isHit(player))
+                        if (levels[CurrentLevel].enemies[i, j].isHit(player) && !flag)
                         {
-                            GameOver = true;
+
+                            lives--;
+                            if (lives == 0)
+                            {
+                                GameOver = true;
+                            }
                             flag = true;
                             break;
                         }
                         else if (levels[CurrentLevel].enemies[i, j].projectile != null)
                         {
-                            if (player.isHit(levels[CurrentLevel].enemies[i, j].projectile))
+                            if (player.isHit(levels[CurrentLevel].enemies[i, j].projectile) &&!flag)
                             {
-                                GameOver = true;
+
+                                lives--;
+                                if (lives == 0)
+                                {
+                                    GameOver = true;
+                                }
+                                levels[CurrentLevel].enemies[i, j].projectile = null;
                                 flag = true;
                                 break;
                             }

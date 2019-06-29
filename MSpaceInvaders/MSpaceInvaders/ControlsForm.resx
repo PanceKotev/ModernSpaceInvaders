@@ -117,14 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Za kontrola na pilotot se koristat 
-strelkite za levo i desno. 
-Proektili se ispukuvaat koga kje se 
-pritisne space
- i se unishtuvaat protivnickite brodovi.
- Protivnickite brodovi isto taka 
-ispukuvaat proektili i ako te 
-pogodat zavrsuva igrata.</value>
-  </data>
 </root>

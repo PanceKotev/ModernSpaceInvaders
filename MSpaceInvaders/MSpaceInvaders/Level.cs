@@ -22,7 +22,7 @@ namespace MSpaceInvaders
             Height = height;
             if (lvl == 1)
             {
-                background = Properties.Resources.Space;
+                background = Properties.Resources.SpaceGame2;
                 columns = 5;
                 rows = 3;
                 enemyDirection = Direction.RIGHT;
@@ -58,7 +58,7 @@ namespace MSpaceInvaders
         }
         public void Draw(Graphics g)
         {
-            g.DrawImage(background, 0, 0, Width, Height);
+            g.DrawImage(background, 0, 0,Width,Height);
             for (int i = 0; i < columns; i++)
             {
                 for (int j = 0; j < rows; j++)

@@ -23,5 +23,23 @@ namespace MSpaceInvaders
             form.Show();
             this.Hide();
         }
+
+        private void ControlsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ControlsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+
+        }
+
+        private void ControlsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StartForm forma = new StartForm();
+            forma.Show();
+            this.Hide();
+        }
     }
 }
