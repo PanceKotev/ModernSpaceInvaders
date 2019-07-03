@@ -86,7 +86,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "StartForm";
+            this.Text = "Modern Space Invaders";
             this.Leave += new System.EventHandler(this.StartForm_Leave);
             this.ResumeLayout(false);
 

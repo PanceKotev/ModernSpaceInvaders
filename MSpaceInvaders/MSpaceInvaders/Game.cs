@@ -17,43 +17,37 @@ namespace MSpaceInvaders
         public int Width { get; set; }
         public int Height { get; set; }
         public int columns { get; set; }
+        public int speedProj { get; set; }
+        public List<Star> stars { get; set; }
         public int rows { get; set; }
         public int CurrentLevel { get; set; }
+        public List<Gift> gifts { get; set; }
         public int nbrBullets { get; set; }
         public int lives { get; set; }
+        public static Random random = new Random();
         public List<Level> levels { get; set; }
 
         Direction enemyDirection { get; set; }
         public Game(int width,int height)
         {
             CurrentLevel = 0;
+            speedProj = 10;
             lives = 3;
-            
             Width = width;
             Height = height;
+            gifts = new List<Gift>();
             levels = new List<Level>();
+            stars = new List<Star>();
+            GenerateStars();
             levels.Add(new Level(Width, Height, 1));
             levels.Add(new Level(Width, Height, 2));
+            levels.Add(new Level(Width, Height, 3));
             nbrBullets = 1;
-
             columns = levels[CurrentLevel].columns;
             rows = levels[CurrentLevel].rows;
-            //columns = 5;
-            // rows = 3;
             GameOver = false;
-           // enemyDirection = Direction.RIGHT;
             firedP = new List<Projectile>();
-            player = new Ship(Width / 2, Height-80);
-           /* enemies = new Enemy[columns, rows];
-            for (int i = 0; i < columns;i++)
-            {
-                for (int j = 0; j < rows; j++)
-                {
-                    enemies[i, j] = new Enemy(new Point(i * 50+((Width-200)/2), j * 50));
-                }
-               
-
-            }*/
+            player = new Ship(Width / 2, Height-115);
 
 
         }
@@ -61,7 +55,7 @@ namespace MSpaceInvaders
         {
             if (firedP.Count < nbrBullets)
             {
-                Projectile p = new Projectile(new Point(player.X + 20, player.Y - 10), true);
+                Projectile p = new Projectile(new Point(player.X + 20, player.Y - 10), true,speedProj);
                 firedP.Add(p);
             }
         }
@@ -119,6 +113,8 @@ namespace MSpaceInvaders
                         {
                             firedP.RemoveAt(i);
                             levels[CurrentLevel].enemies[j, k].isDead = true;
+                            generateGift(levels[CurrentLevel].enemies[j, k].location);
+                            levels[CurrentLevel].decideMost();
                             flag = true;
                             break;
                         }
@@ -132,8 +128,15 @@ namespace MSpaceInvaders
         public void Draw(Graphics g)
         {
 
-            
+            foreach(Star s in stars)
+            {
+                s.Draw(g);
+            }
             levels[CurrentLevel].Draw(g);
+            foreach(Gift gI in gifts)
+            {
+                gI.Draw(g);
+            }
             foreach(Projectile p in firedP)
             {
                 p.Draw(g);
@@ -144,50 +147,21 @@ namespace MSpaceInvaders
 
 
         }
-       /* public void moveEnemies()
+        public void generateGift(Point p)
         {
-            for(int i = 0; i < columns; i++)
+            int b = random.Next(1, 20);
+            if (b == 4)
             {
-                for(int j = 0; j < rows; j++)
-                {
-                    enemies[i, j].Move(enemyDirection);
-                }
+                gifts.Add(new Gift(new Point(p.X-levels[0].enemies[0,0].size.Width/2,p.Y-10)));
             }
-        }*/
-       /* public void updateDir()
-        {
-            if (enemies[columns-1, 0].location.X + enemies[columns - 1, 0].size.Width >= Width-enemies[0,0].velocityX)
-            {
-                for(int i = 0; i < columns; i++)
-                {
-                    for(int j = 0; j < rows; j++)
-                    {
-                        enemies[i, j].Move(Direction.DOWN);
-                    }
-                }
-                enemyDirection = Direction.LEFT;
-            }
-
-            else if (enemies[0, 0].location.X <= 0+ enemies[0, 0].velocityX)
-            {
-                for (int i = 0; i < columns; i++)
-                {
-                    for (int j = 0; j < rows; j++)
-                    {
-                        enemies[i, j].Move(Direction.DOWN);
-                    }
-                }
-                enemyDirection = Direction.RIGHT;
-            }
-
-        }*/
+        }
         public void moveProjectiles()
         {
             if (firedP.Count >= 1)
             {
                 for (int i=0; i < firedP.Count; i++)
                 {
-                    if (firedP[i].start.Y - firedP[i].size.Height <= 0-firedP[i].speed)
+                    if (firedP[i].start.Y - firedP[i].size.Height <= 0)
                     {
                         firedP.RemoveAt(i);
                     }
@@ -198,26 +172,13 @@ namespace MSpaceInvaders
                 }
             }
         }
-        /*    public void enemyMoveProj()
-            {
-                for(int i = 0; i < columns; i++)
-                {
-                    Enemy en;
-                    for (int j = 0; j < rows; j++)
-                    {
-                        en = enemies[i, j];
-                        if (en.projectile != null)
-                            en.projMove(Height);
-                    }
-                }
-
-            }*/
         public void nextLevel()
         {
             if (CurrentLevel < levels.Count-1)
             {
                 if (levels[CurrentLevel].allDead())
                 {
+                    GenerateStars();
                     CurrentLevel++;
                     firedP.Clear();
                     columns = levels[CurrentLevel].columns;
@@ -233,9 +194,61 @@ namespace MSpaceInvaders
                 moveProjectiles();
                 levels[CurrentLevel].enemyMoveProj();
                 levels[CurrentLevel].updateDir();
+                moveGifts();
+                takeGift(player);
                 enemyHit();
                 shipHit();
                
+            }
+        }
+        public void GenerateStars()
+        {
+            Random r = new Random();
+            stars.Clear();
+           int nbr= r.Next(32, 45);
+            for (int i = 0; i < nbr; i++)
+            {
+                stars.Add(new Star(Width, Height - 35));
+            }
+        }
+        public void moveGifts()
+        {
+            if (gifts.Count > 0)
+            {
+                for (int i = 0; i < gifts.Count; i++)
+                {
+                    if (gifts[i].location.Y >= Height - 45)
+                    {
+                        gifts.RemoveAt(i);
+                    }
+                    else
+                        gifts[i].Move();
+                }
+            }
+        }
+        public void takeGift(Ship s)
+        {
+            if (gifts.Count > 0)
+            {
+                for (int i = 0; i < gifts.Count; i++)
+                {
+                    if (gifts[i].isHit(s))
+                    {
+                        if (gifts[i].type == UpgradeType.life)
+                        {
+                            lives = lives + gifts[i].amount;
+                        }
+                        else if (gifts[i].type == UpgradeType.max_bullets)
+                        {
+                            nbrBullets = nbrBullets + gifts[i].amount;
+                        }
+                        else if (gifts[i].type == UpgradeType.proj_speed)
+                        {
+                            speedProj = speedProj + gifts[i].amount;
+                        }
+                        gifts.RemoveAt(i);
+                    }
+                }
             }
         }
 

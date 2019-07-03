@@ -83,6 +83,26 @@ namespace MSpaceInvaders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap computer_key_Esc {
+            get {
+                object obj = ResourceManager.GetObject("computer_key_Esc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap computer_key_Space_bar_T {
+            get {
+                object obj = ResourceManager.GetObject("computer_key_Space_bar_T", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap enemy_ship {
             get {
                 object obj = ResourceManager.GetObject("enemy_ship", resourceCulture);
@@ -143,6 +163,16 @@ namespace MSpaceInvaders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap New_Piskel {
+            get {
+                object obj = ResourceManager.GetObject("New_Piskel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Space {
             get {
                 object obj = ResourceManager.GetObject("Space", resourceCulture);
@@ -196,6 +226,16 @@ namespace MSpaceInvaders.Properties {
         internal static System.Drawing.Bitmap starry_sky_night {
             get {
                 object obj = ResourceManager.GetObject("starry_sky_night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap upgradebox {
+            get {
+                object obj = ResourceManager.GetObject("upgradebox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -21,10 +21,10 @@ namespace MSpaceInvaders
         public bool Friendly { get; set; }
         public Rectangle bounds { get; set; }
 
-        public Projectile(Point s,bool f)
+        public Projectile(Point s,bool f,int sp=10)
         {
             Type = Projectile_Type.NORMAL;
-            speed = 10;
+            speed = sp;
             size = new Size(6,10);
             start = s;
             bounds = new Rectangle(start, size);

@@ -85,7 +85,7 @@ namespace MSpaceInvaders
         {
             if (projectile != null)
             {
-                if (projectile.start.Y + projectile.size.Height >= height-projectile.speed)
+                if (projectile.start.Y + projectile.size.Height >= height-(projectile.speed+35))
                 {
                     projectile = null;
                 }

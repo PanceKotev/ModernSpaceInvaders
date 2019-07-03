@@ -15,6 +15,7 @@ namespace MSpaceInvaders
         
         int i = 1;
         Game igra;
+        Boolean isPaused;
         private static Random rand = new Random();
         int rr = rand.Next(50,200);
         public Form1()
@@ -28,101 +29,84 @@ namespace MSpaceInvaders
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Comment
-            
+            isPaused = false;
             igra = new Game(this.Bounds.Width, this.Bounds.Height);
-            pictureBox1.Location = new Point(10, this.Bounds.Height - pictureBox1.Size.Height * 3);
-            label1.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y - pictureBox1.Height / 2 + label1.Size.Height);
             timer1.Start();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            /*  sh.Draw(e.Graphics);
-              if (p != null) 
-                  p.Draw(e.Graphics); 
-              en.Draw(e.Graphics);*/
             igra.Draw(e.Graphics);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
-            {
-                //  igra.player.Move(0);
-                mvLeft.Start();
-            }
-            if (e.KeyCode == Keys.Right)
-            {
-                //igra.player.Move(1);
-                mvRight.Start();
-            }
-            if (e.KeyCode == Keys.Space)
-            {
-                igra.Shoot();
-            }
-            Invalidate(true);
-        }
-        public void changeL()
-        {
-            this.BackgroundImage = igra.levels[igra.CurrentLevel].background;
 
+                if (e.KeyCode == Keys.Left)
+                {
+                    //  igra.player.Move(0);
+                    mvLeft.Start();
+                }
+                if (e.KeyCode == Keys.Right)
+                {
+                    //igra.player.Move(1);
+                    mvRight.Start();
+                }
+                if (e.KeyCode == Keys.Space)
+                {
+                    igra.Shoot();
+                }
+                Invalidate(true);
+            
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            /*  if (p != null)
-              {
-                  if (!p.exists)
-                  {
-                      p = null;
-
-                  }
-                  else
-                  p.Move(true);
-                  if (en.isHit(p))
-                      MessageBox.Show("It hit");
-
-              }
-              */
-            if (igra.GameOver == true)
+            if (!isPaused)
             {
-                
-                igra = new Game(this.Bounds.Width, this.Bounds.Height);
-                this.BackgroundImage = igra.levels[0].background;
-                label1.Text = "x" + igra.lives.ToString();
+                if (igra.GameOver == true)
+                {
+
+                    igra = new Game(this.Bounds.Width, this.Bounds.Height);
+                   
+                }
+                else
+                {
+                    igra.Update();
+                }
+                Invalidate(true);
             }
-            else
-            {
-                igra.Update();
-                label1.Text = "x" + igra.lives.ToString();
-            }
-            Invalidate(true);
-            
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            for(int j = 0; j < igra.columns; j++) {
-                for(int k = 0; k < igra.rows; k++)
+            if (!isPaused)
+            {
+                for (int j = 0; j < igra.columns; j++)
                 {
-                    Enemy en = igra.levels[igra.CurrentLevel].enemies[j, k];
-                    if (i % en.random == 0 && en.projectile==null)
+                    for (int k = 0; k < igra.rows; k++)
                     {
-                        en.Fire();
-                        en.random = rand.Next(50, 200);
+                        Enemy en = igra.levels[igra.CurrentLevel].enemies[j, k];
+                        if (i % en.random == 0 && en.projectile == null)
+                        {
+                            en.Fire();
+                            en.random = rand.Next(50, 200);
+                        }
                     }
                 }
-            }
-            i++;
-            
+                i++;
 
-            Invalidate(true);
+
+                Invalidate(true);
+            }
         }
 
         private void enemyMovement_Tick(object sender, EventArgs e)
         {
-            igra.levels[igra.CurrentLevel].moveEnemies();
-            Invalidate(true);
+            if (!isPaused)
+            {
+                igra.levels[igra.CurrentLevel].moveEnemies();
+                Invalidate();
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -132,12 +116,14 @@ namespace MSpaceInvaders
 
         private void mvRight_Tick(object sender, EventArgs e)
         {
+            if(!isPaused)
             igra.player.Move(1,this.Bounds.Width);
         }
 
         private void mvLeft_Tick(object sender, EventArgs e)
         {
-            igra.player.Move(0,this.Bounds.Width);
+            if (!isPaused)
+                igra.player.Move(0,this.Bounds.Width);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -150,6 +136,48 @@ namespace MSpaceInvaders
             {
                 mvLeft.Stop();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                isPaused = true;
+                DialogResult result = MessageBox.Show("Сакаш ли да се вратиш назад?", "Потврда", MessageBoxButtons.YesNo);
+              
+                if (result == DialogResult.Yes)
+                {
+                    StartForm form = new StartForm();
+                    form.Show();
+                    this.Hide();
+                    isPaused = false;
+                }
+                else if (result == DialogResult.No)
+                {
+                    isPaused = false;
+                }
+            }
+        }
+
+        private void maxB_Paint(object sender, PaintEventArgs e)
+        {
+            maxB.Text = "Max Bullets: " + igra.nbrBullets.ToString();
+        }
+
+        private void pSpeed_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void pSpeed_Paint(object sender, PaintEventArgs e)
+        {
+            pSpeed.Text = "Projectile Speed: " + igra.speedProj.ToString();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Paint(object sender, PaintEventArgs e)
+        {
+            label1.Text = "x" + igra.lives.ToString();
         }
     }
 }
