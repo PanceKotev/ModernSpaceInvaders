@@ -72,11 +72,7 @@ namespace MSpaceInvaders
                     {
                         if (level.enemies[i, j].isHit(player) && !flag)
                         {
-                            lives--;
-                            if (lives == 0)
-                            {
-                                GameOver = true;
-                            }
+                            GameOver = true;
                             flag = true;
                             break;
                         }

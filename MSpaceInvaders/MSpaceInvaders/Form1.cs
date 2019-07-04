@@ -12,7 +12,7 @@ namespace MSpaceInvaders
 {
     public partial class Form1 : Form
     {
-        
+        bool modalno = false;
         int i = 1;
         Game igra;
         Boolean isPaused;
@@ -63,10 +63,28 @@ namespace MSpaceInvaders
         {
             if (!isPaused)
             {
-                if (igra.GameOver == true)
+                if (igra.GameOver == true && !modalno)
                 {
-
-                    igra = new Game(this.Bounds.Width, this.Bounds.Height);
+                    isPaused = true;
+                   // igra = new Game(this.Bounds.Width, this.Bounds.Height);
+                    DialogResult rez = MessageBox.Show("Score:" + igra.Score.ToString() + "\n" + "Сакаш да се обидеш повторно?", "Game Over", MessageBoxButtons.YesNo);
+                    modalno = true;
+                    if (rez == DialogResult.Yes)
+                    {
+                        modalno = false;
+                        igra = new Game(this.Bounds.Width, this.Bounds.Height);
+                        isPaused = false;
+                    }
+                    else
+                    {
+                        
+                        modalno = false;
+                        isPaused = false;
+                        StartForm form = new StartForm();
+                        form.Show();
+                        timer1.Stop();
+                        this.Hide();
+                    }
                    
                 }
                 else

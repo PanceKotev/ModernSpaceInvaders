@@ -54,7 +54,6 @@ namespace MSpaceInvaders
             }
             rightmost = enemies[columns - 1, 0];
             leftmost = enemies[0, 0];
-
         }
         public void Draw(Graphics g)
         {
@@ -85,7 +84,7 @@ namespace MSpaceInvaders
         }
         public void updateDir()
         {
-            if (rightmost.location.X + enemies[columns - 1, 0].size.Width >= Width - rightmost.velocityX)
+            if (rightmost.location.X + enemies[columns - 1, 0].size.Width >= Width-rightmost.size.Width)
             {
                 for (int i = 0; i < columns; i++)
                 {
@@ -128,6 +127,7 @@ namespace MSpaceInvaders
             int indexerL = columns - 1;
             for (int i = 0; i < columns; i++)
             {
+
                 for(int j = 0; j < rows; j++)
                 {
                     Enemy en = enemies[i, j];
