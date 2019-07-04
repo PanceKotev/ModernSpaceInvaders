@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,13 @@ namespace MSpaceInvaders
         public int Y { get; set; }
         public Size size { get; set; }
         public Rectangle bounds { get; set; }
-        public Image Img = Properties.Resources.Space_Ship;
 
+        public Image Img = Properties.Resources.ship5;
         public Ship(int x, int y)
         {
             X = x;
             Y = y;
-            size = new Size(40, 40);
+            size = new Size(35, 35);
             bounds = new Rectangle(new Point(X, Y), size);
         }
 
@@ -34,12 +35,12 @@ namespace MSpaceInvaders
         {
             if (State == 0 && !(X - size.Width <= 0 - size.Width / 2))
             {
-                X = X - 20;
+                X = X - size.Width/2;
                 bounds = new Rectangle(new Point(X, Y), size);
             }
             else if(State == 1 && !(X + size.Width >= Width - size.Width / 2))
             {
-                X = X + 20;
+                X = X + size.Width/2;
                 bounds = new Rectangle(new Point(X, Y), size);
             }
         }

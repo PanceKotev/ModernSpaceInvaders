@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,27 +25,26 @@ namespace MSpaceInvaders
         public List<Gift> gifts { get; set; }
         public int nbrBullets { get; set; }
         public int lives { get; set; }
+        public Level level { get; set; }
+        public int Score { get; set; }
         public static Random random = new Random();
-        public List<Level> levels { get; set; }
-
         Direction enemyDirection { get; set; }
         public Game(int width,int height)
         {
-            CurrentLevel = 0;
+            Score = 0;
+            CurrentLevel = 1;
             speedProj = 10;
             lives = 3;
             Width = width;
             Height = height;
             gifts = new List<Gift>();
-            levels = new List<Level>();
+            level = new Level(Width, Height, CurrentLevel, 0);
             stars = new List<Star>();
             GenerateStars();
-            levels.Add(new Level(Width, Height, 1));
-            levels.Add(new Level(Width, Height, 2));
-            levels.Add(new Level(Width, Height, 3));
+
             nbrBullets = 1;
-            columns = levels[CurrentLevel].columns;
-            rows = levels[CurrentLevel].rows;
+            columns = level.columns;
+            rows = level.rows;
             GameOver = false;
             firedP = new List<Projectile>();
             player = new Ship(Width / 2, Height-115);
@@ -55,10 +55,12 @@ namespace MSpaceInvaders
         {
             if (firedP.Count < nbrBullets)
             {
-                Projectile p = new Projectile(new Point(player.X + 20, player.Y - 10), true,speedProj);
+                Projectile p = new Projectile(new Point(player.X + 17, player.Y - 10), true,speedProj);
                 firedP.Add(p);
             }
+                
         }
+     
         public void shipHit()
         {
             if (!GameOver)
@@ -68,9 +70,8 @@ namespace MSpaceInvaders
                     bool flag = false;
                     for (int j = 0; j < rows; j++)
                     {
-                        if (levels[CurrentLevel].enemies[i, j].isHit(player) && !flag)
+                        if (level.enemies[i, j].isHit(player) && !flag)
                         {
-
                             lives--;
                             if (lives == 0)
                             {
@@ -79,17 +80,16 @@ namespace MSpaceInvaders
                             flag = true;
                             break;
                         }
-                        else if (levels[CurrentLevel].enemies[i, j].projectile != null)
+                        else if (level.enemies[i, j].projectile != null)
                         {
-                            if (player.isHit(levels[CurrentLevel].enemies[i, j].projectile) &&!flag)
+                            if (player.isHit(level.enemies[i, j].projectile) && !flag)
                             {
-
                                 lives--;
                                 if (lives == 0)
                                 {
                                     GameOver = true;
                                 }
-                                levels[CurrentLevel].enemies[i, j].projectile = null;
+                                level.enemies[i, j].projectile = null;
                                 flag = true;
                                 break;
                             }
@@ -100,21 +100,24 @@ namespace MSpaceInvaders
                 }
             }
         }
+       
         public void enemyHit()
         {
-            for(int i = 0; i < firedP.Count; i++)
+            for (int i = 0; i < firedP.Count; i++)
             {
-                for(int j = 0; j < columns; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     bool flag = false;
-                    for(int k = 0; k < rows; k++)
+                    for (int k = 0; k < rows; k++)
                     {
-                        if (levels[CurrentLevel].enemies[j, k].isHit(firedP[i]) && !levels[CurrentLevel].enemies[j,k].isDead)
+                        if (level.enemies[j, k].isHit(firedP[i]) && !level.enemies[j, k].isDead)
                         {
                             firedP.RemoveAt(i);
-                            levels[CurrentLevel].enemies[j, k].isDead = true;
-                            generateGift(levels[CurrentLevel].enemies[j, k].location);
-                            levels[CurrentLevel].decideMost();
+                            Score += 100;
+                            level.enemies[j, k].isDead = true;
+                            level.decideMost();
+                            generateGift(level.enemies[j, k].location);
+
                             flag = true;
                             break;
                         }
@@ -132,7 +135,7 @@ namespace MSpaceInvaders
             {
                 s.Draw(g);
             }
-            levels[CurrentLevel].Draw(g);
+            level.Draw(g);
             foreach(Gift gI in gifts)
             {
                 gI.Draw(g);
@@ -152,7 +155,7 @@ namespace MSpaceInvaders
             int b = random.Next(1, 20);
             if (b == 4)
             {
-                gifts.Add(new Gift(new Point(p.X-levels[0].enemies[0,0].size.Width/2,p.Y-10)));
+                gifts.Add(new Gift(new Point(p.X-level.enemies[0,0].size.Width/2,p.Y-10)));
             }
         }
         public void moveProjectiles()
@@ -172,33 +175,37 @@ namespace MSpaceInvaders
                 }
             }
         }
+
+
         public void nextLevel()
         {
-            if (CurrentLevel < levels.Count-1)
-            {
-                if (levels[CurrentLevel].allDead())
+
+                if (level.allDead())
                 {
+                    Score += level.difficulty * 250;
                     GenerateStars();
                     CurrentLevel++;
                     firedP.Clear();
-                    columns = levels[CurrentLevel].columns;
-                    rows = levels[CurrentLevel].rows;
+                    level = new Level(Width, Height, CurrentLevel, 0);
+                    columns = level.columns;
+                    rows = level.rows;
                 }
-            }
+            
         }
+
         public void Update()
         {
             if (!GameOver)
             {
                 nextLevel();
                 moveProjectiles();
-                levels[CurrentLevel].enemyMoveProj();
-                levels[CurrentLevel].updateDir();
+                level.enemyMoveProj();
+                level.updateDir();
                 moveGifts();
                 takeGift(player);
                 enemyHit();
                 shipHit();
-               
+
             }
         }
         public void GenerateStars()
@@ -234,6 +241,7 @@ namespace MSpaceInvaders
                 {
                     if (gifts[i].isHit(s))
                     {
+                        Score += 200;
                         if (gifts[i].type == UpgradeType.life)
                         {
                             lives = lives + gifts[i].amount;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,13 +31,14 @@ namespace MSpaceInvaders
         {
             isDead = false;
         }
-        public Enemy(Point loc)
+        public Enemy(Point loc,int velocityx=10,int velocityy=10,int sp=10)
         {
-            size = new Size(40, 40);
+            size = new Size(35, 35);
             location = loc;
+            speed = sp;
+            velocityX = velocityx;
+            velocityY = velocityy;
             bounds = new Rectangle(loc, size);
-            velocityX = size.Width / 3;
-            velocityY = size.Height / 3;
             image = Properties.Resources.enemy_ship;
             projectile = null;
             random = rand.Next(50, 200);
@@ -78,8 +80,11 @@ namespace MSpaceInvaders
         }
         public void Fire()
         {
-            if(!isDead)
-            projectile = new Projectile(new Point(location.X + size.Width / 2, location.Y + size.Height + size.Height/3),false);
+            if (!isDead)
+            {
+                projectile = new Projectile(new Point(location.X + size.Width / 2, location.Y + size.Height + size.Height / 3), false,speed);
+
+            }
         }
         public void projMove(int height)
         {

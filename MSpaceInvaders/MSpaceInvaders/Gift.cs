@@ -32,11 +32,11 @@ namespace MSpaceInvaders
         }
         public void Draw(Graphics g)
         {
-            g.DrawImage(sprite, location.X,location.Y,30,30);
+            g.DrawImage(sprite, location.X,location.Y,25,25);
         }
         public bool isHit(Ship s)
         {
-            Rectangle b = new Rectangle(location, new Size(30, 30));
+            Rectangle b = new Rectangle(location, new Size(25, 25));
             return b.IntersectsWith(s.bounds);
         }
         public void Move()

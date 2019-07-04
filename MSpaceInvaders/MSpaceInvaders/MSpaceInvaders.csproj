@@ -163,5 +163,35 @@
   <ItemGroup>
     <None Include="Resources\computer_key_Space_bar_T.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_shoot.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\igm_music.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enemy_shoot.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\get_hit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collect_gift.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alien4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spaceshipspr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cartoonship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roundysh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

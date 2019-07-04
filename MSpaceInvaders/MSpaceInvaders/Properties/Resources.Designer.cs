@@ -61,6 +61,15 @@ namespace MSpaceInvaders.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream collect_gift {
+            get {
+                return ResourceManager.GetStream("collect_gift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap computer_key_Arrow_Left_T {
@@ -111,12 +120,39 @@ namespace MSpaceInvaders.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream enemy_shoot {
+            get {
+                return ResourceManager.GetStream("enemy_shoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream get_hit {
+            get {
+                return ResourceManager.GetStream("get_hit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap heart {
             get {
                 object obj = ResourceManager.GetObject("heart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream igm_music {
+            get {
+                return ResourceManager.GetStream("igm_music", resourceCulture);
             }
         }
         
@@ -166,6 +202,35 @@ namespace MSpaceInvaders.Properties {
         internal static System.Drawing.Bitmap New_Piskel {
             get {
                 object obj = ResourceManager.GetObject("New_Piskel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream player_shoot {
+            get {
+                return ResourceManager.GetStream("player_shoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap roundysh {
+            get {
+                object obj = ResourceManager.GetObject("roundysh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ship5 {
+            get {
+                object obj = ResourceManager.GetObject("ship5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -15,61 +15,42 @@ namespace MSpaceInvaders
         public int Width { get; set; }
         public int Height { get; set; }
         public Enemy rightmost { get; set; }
+        public static Random random = new Random();
+        public int difficulty = 1;
         public Enemy leftmost { get; set; }
         public Direction enemyDirection { get; set; }
-        public Level(int width,int height,int lvl)
+        public Level(int width,int height,int difficulty1,int something)
         {
             Width = width;
             Height = height;
+            if (difficulty1 % 3 == 0 && difficulty1!=0)
+            {
+                difficulty++;
+            }
+            columns = random.Next(difficulty + 3, difficulty + 6);
+            if (columns > 11)
+                columns = 11;
             
-            if (lvl == 1)
-            {
-                columns = 5;
-                rows = 3;
-                enemyDirection = Direction.RIGHT;
-                enemies = new Enemy[columns, rows];
-                for (int i = 0; i < columns; i++)
-                {
-                    for (int j = 0; j < rows; j++)
-                    {
-                        enemies[i, j] = new Enemy(new Point(i * 50 + ((Width - 200) / 2), j * 50));
-                    }
-
-
-                }
-
-            }
-            else if (lvl == 2)
-            {
-                columns = 6;
-                rows = 4;
-                enemyDirection = Direction.RIGHT;
-                enemies = new Enemy[columns, rows];
-                for (int i = 0; i < columns; i++)
-                {
-                    for (int j = 0; j < rows; j++)
-                    {
-                        enemies[i, j] = new Enemy(new Point(i * 50 + ((Width - 200) / 2), j * 50));
-                    }
-
-
-                }
-            }
-            else if (lvl == 3)
-            {
-                columns = 6;
-                rows = 5;
+            rows = random.Next(difficulty + 3, difficulty + 4);
+            if (rows > 8)
+                rows = 8;
+            int velocityX = random.Next(difficulty + 9, difficulty + 12);
+            int velocityY = random.Next(difficulty + 9, difficulty + 12);
+            int speed = random.Next(9, 15);
+            int r = random.Next(0, 2);
+            if (r == 0)
                 enemyDirection = Direction.LEFT;
-                enemies = new Enemy[columns, rows];
-                for (int i = 0; i < columns; i++)
+            else if (r == 1)
+                enemyDirection = Direction.RIGHT;
+            enemies = new Enemy[columns, rows];
+            for (int i = 0; i < columns; i++)
+            {
+                for (int j = 0; j < rows; j++)
                 {
-                    for (int j = 0; j < rows; j++)
-                    {
-                        enemies[i, j] = new Enemy(new Point(i * 50 + ((Width - 200) / 2), j * 50));
-                    }
-
-
+                    enemies[i, j] = new Enemy(new Point(i * 45 + ((Width - columns*45) / 2), j * 45),velocityX,velocityY,speed);
                 }
+
+
             }
             rightmost = enemies[columns - 1, 0];
             leftmost = enemies[0, 0];
@@ -144,7 +125,7 @@ namespace MSpaceInvaders
             Enemy right=rightmost;
             Enemy left = leftmost;
             int indexerR =0;
-            int indexerL = rows-1;
+            int indexerL = columns - 1;
             for (int i = 0; i < columns; i++)
             {
                 for(int j = 0; j < rows; j++)
@@ -155,10 +136,10 @@ namespace MSpaceInvaders
                         right = en;
                         indexerR = i;
                     }
-                    if(!en.isDead && j < indexerL)
+                    if(!en.isDead && i < indexerL)
                     {
                         left = en;
-                        indexerL = j;
+                        indexerL = i;
                     }
                 }
             }

@@ -85,7 +85,7 @@ namespace MSpaceInvaders
                 {
                     for (int k = 0; k < igra.rows; k++)
                     {
-                        Enemy en = igra.levels[igra.CurrentLevel].enemies[j, k];
+                        Enemy en = igra.level.enemies[j, k];
                         if (i % en.random == 0 && en.projectile == null)
                         {
                             en.Fire();
@@ -104,7 +104,7 @@ namespace MSpaceInvaders
         {
             if (!isPaused)
             {
-                igra.levels[igra.CurrentLevel].moveEnemies();
+                igra.level.moveEnemies();
                 Invalidate();
             }
         }
@@ -178,6 +178,16 @@ namespace MSpaceInvaders
         private void label1_Paint(object sender, PaintEventArgs e)
         {
             label1.Text = "x" + igra.lives.ToString();
+        }
+
+        private void lbDifficulty_Paint(object sender, PaintEventArgs e)
+        {
+            lbDifficulty.Text = "Wave : " + igra.CurrentLevel.ToString();
+        }
+
+        private void label2_Paint(object sender, PaintEventArgs e)
+        {
+            label2.Text = igra.Score.ToString();
         }
     }
 }

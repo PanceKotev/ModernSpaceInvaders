@@ -25,7 +25,7 @@ namespace MSpaceInvaders
         {
             Type = Projectile_Type.NORMAL;
             speed = sp;
-            size = new Size(6,10);
+            size = new Size(5,9);
             start = s;
             bounds = new Rectangle(start, size);
             Friendly = f;
@@ -34,7 +34,7 @@ namespace MSpaceInvaders
         {
             Brush b;
             if (Friendly)
-                b = new SolidBrush(Color.Blue);
+                b = new SolidBrush(Color.Green);
             else
                 b = new SolidBrush(Color.Red);
             if (Type==Projectile_Type.NORMAL)
