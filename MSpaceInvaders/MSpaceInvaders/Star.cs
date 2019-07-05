@@ -12,6 +12,12 @@ namespace MSpaceInvaders
         public Image sprite { get; set; }
         public Point location { get; set; }
         public static Random random = new Random();
+        /// <summary>
+        /// Constructor of the Star class which is used for the background of levels.
+        /// Randomly chooses which type of star and its location.
+        /// </summary>
+        /// <param name="Width">Width of the form.</param>
+        /// <param name="Height">Height of the form.</param>
         public Star(int Width, int Height)
         {
             int dec = random.Next(0, 2);
@@ -27,6 +33,10 @@ namespace MSpaceInvaders
             int Y = random.Next(10, Height - 10);
             location = new Point(X, Y);
         }
+        /// <summary>
+        /// Draws the star depending on the type.
+        /// </summary>
+        /// <param name="g">Graphics object of the form.</param>
         public void Draw(Graphics g)
         {
            
@@ -39,10 +49,6 @@ namespace MSpaceInvaders
                 g.FillRectangle(new SolidBrush(Color.Blue), location.X, location.Y, 4, 4);
             }
 
-        }
-        public void Move()
-        {
-            location = new Point(location.X, location.Y + 10);
         }
     }
 }

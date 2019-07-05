@@ -7,29 +7,31 @@ using System.Threading.Tasks;
 
 namespace MSpaceInvaders
 {
-    public enum Projectile_Type
-    {
-        NORMAL,
-        DOUBLE
-    }
     public class Projectile
     {
         public Point start { get; set; }
         public int speed { get; set; }
         public Size size { get; set; }
-        public Projectile_Type Type { get; set; }
         public bool Friendly { get; set; }
         public Rectangle bounds { get; set; }
-
+        /// <summary>
+        /// Constructor for projectile class.
+        /// </summary>
+        /// <param name="s">Point it should appear at.</param>
+        /// <param name="f">If it is friendly.</param>
+        /// <param name="sp">Speed of the projectile.</param>
         public Projectile(Point s,bool f,int sp=10)
         {
-            Type = Projectile_Type.NORMAL;
             speed = sp;
             size = new Size(5,9);
             start = s;
             bounds = new Rectangle(start, size);
             Friendly = f;
         }
+        /// <summary>
+        /// Draws the projectile green if it is friendly,red if it is not.
+        /// </summary>
+        /// <param name="g">Graphics object from the form.</param>
         public void Draw(Graphics g)
         {
             Brush b;
@@ -37,14 +39,12 @@ namespace MSpaceInvaders
                 b = new SolidBrush(Color.Green);
             else
                 b = new SolidBrush(Color.Red);
-            if (Type==Projectile_Type.NORMAL)
             g.FillRectangle(b,start.X,start.Y,size.Width,size.Height);
-            else
-            {
-                g.FillRectangle(b, start.X - ((size.Width / 2)+10), start.Y, size.Width, size.Height);
-                g.FillRectangle(b, start.X - ((size.Width / 2) - 10), start.Y, size.Width, size.Height);
-            }
         }
+        /// <summary>
+        /// Moves the projectile up or down depending on the parameter up.
+        /// </summary>
+        /// <param name="up">True for down, False for up.</param>
         public void Move(bool up)
         {
             if (up)

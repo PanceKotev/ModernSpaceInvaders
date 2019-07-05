@@ -238,6 +238,26 @@ namespace MSpaceInvaders.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ship5_hit {
+            get {
+                object obj = ResourceManager.GetObject("ship5_hit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon ship51 {
+            get {
+                object obj = ResourceManager.GetObject("ship51", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Space {
             get {
                 object obj = ResourceManager.GetObject("Space", resourceCulture);

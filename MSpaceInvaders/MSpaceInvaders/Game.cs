@@ -29,6 +29,12 @@ namespace MSpaceInvaders
         public int Score { get; set; }
         public static Random random = new Random();
         Direction enemyDirection { get; set; }
+        /// <summary>
+        /// Constructor for the game class.
+        /// Sets all the variables to default values.
+        /// </summary>
+        /// <param name="width">Width of the form.</param>
+        /// <param name="height">Height of the form.</param>
         public Game(int width,int height)
         {
             Score = 0;
@@ -38,7 +44,7 @@ namespace MSpaceInvaders
             Width = width;
             Height = height;
             gifts = new List<Gift>();
-            level = new Level(Width, Height, CurrentLevel, 0);
+            level = new Level(Width, Height, CurrentLevel);
             stars = new List<Star>();
             GenerateStars();
 
@@ -51,6 +57,9 @@ namespace MSpaceInvaders
 
 
         }
+        /// <summary>
+        /// This is a function that creates a new projectile if the maximum number of bullets hasnt been reached.
+        /// </summary>
         public void Shoot()
         {
             if (firedP.Count < nbrBullets)
@@ -60,7 +69,11 @@ namespace MSpaceInvaders
             }
                 
         }
-     
+        /// <summary>
+        /// This function checks whether the player has been hit by either the enemy projectiles or the actual enemies,
+        ///  if it has been hit by an enemy projectile the players life total decreases by 1, if hit by an actual enemy
+        ///  then the game is over.
+        /// </summary>
         public void shipHit()
         {
             if (!GameOver)
@@ -81,6 +94,7 @@ namespace MSpaceInvaders
                             if (player.isHit(level.enemies[i, j].projectile) && !flag)
                             {
                                 lives--;
+                                player.isGettingHit = true;
                                 if (lives == 0)
                                 {
                                     GameOver = true;
@@ -96,7 +110,11 @@ namespace MSpaceInvaders
                 }
             }
         }
-       
+       /// <summary>
+       /// This function checks whether the enemies in the level are hit by the projectiles which are shot by the player,
+       /// deletes the enemy if it has been hit,
+       /// and has a 1 in 20 chance to generate a gift at the location at the enemy if the enemy has been hit.
+       /// </summary>
         public void enemyHit()
         {
             for (int i = 0; i < firedP.Count; i++)
@@ -124,6 +142,10 @@ namespace MSpaceInvaders
                 }
             }
         }
+        /// <summary>
+        /// Draws the level background then the level, player , gifts if there are any and then the projectiles shot by the player.
+        /// </summary>
+        /// <param name="g">Graphics object from the form.</param>
         public void Draw(Graphics g)
         {
 
@@ -132,20 +154,26 @@ namespace MSpaceInvaders
                 s.Draw(g);
             }
             level.Draw(g);
-            foreach(Gift gI in gifts)
+            player.Draw(g);
+            foreach (Gift gI in gifts)
             {
                 gI.Draw(g);
             }
-            foreach(Projectile p in firedP)
+            
+            foreach (Projectile p in firedP)
             {
                 p.Draw(g);
             }
-            player.Draw(g);
+           
 
 
 
 
         }
+        /// <summary>
+        /// This function adds a gift with a point P to the list of gifts if the random number generated is hit(has a 1 in 20 chance)
+        /// </summary>
+        /// <param name="p">Position of the enemy</param>
         public void generateGift(Point p)
         {
             int b = random.Next(1, 20);
@@ -154,6 +182,9 @@ namespace MSpaceInvaders
                 gifts.Add(new Gift(new Point(p.X-level.enemies[0,0].size.Width/2,p.Y-10)));
             }
         }
+        /// <summary>
+        /// Moves the projectiles shot by the player.
+        /// </summary>
         public void moveProjectiles()
         {
             if (firedP.Count >= 1)
@@ -172,7 +203,10 @@ namespace MSpaceInvaders
             }
         }
 
-
+        /// <summary>
+        /// Checks whether all the enemies are dead via the all dead function and if they are dead generates a new level based on the difficulty,
+        /// also adds to the total score if the level has been cleared.
+        /// </summary>
         public void nextLevel()
         {
 
@@ -182,13 +216,15 @@ namespace MSpaceInvaders
                     GenerateStars();
                     CurrentLevel++;
                     firedP.Clear();
-                    level = new Level(Width, Height, CurrentLevel, 0);
+                    level = new Level(Width, Height, CurrentLevel);
                     columns = level.columns;
                     rows = level.rows;
                 }
             
         }
-
+        /// <summary>
+        /// This is a function which bundles all the other detection and movement functions in this project.
+        /// </summary>
         public void Update()
         {
             if (!GameOver)
@@ -204,6 +240,9 @@ namespace MSpaceInvaders
 
             }
         }
+        /// <summary>
+        /// This function is responsible for generating the background of the level with the stars object.
+        /// </summary>
         public void GenerateStars()
         {
             Random r = new Random();
@@ -214,6 +253,9 @@ namespace MSpaceInvaders
                 stars.Add(new Star(Width, Height - 35));
             }
         }
+        /// <summary>
+        /// This function moves the gifts if there are any.
+        /// </summary>
         public void moveGifts()
         {
             if (gifts.Count > 0)
@@ -229,6 +271,11 @@ namespace MSpaceInvaders
                 }
             }
         }
+        /// <summary>
+        /// This function checks whether the player has collected any of the gifts and if he has uses it,
+        /// then it deletes the gift from the list.
+        /// </summary>
+        /// <param name="s">The ship which should take the gift.</param>
         public void takeGift(Ship s)
         {
             if (gifts.Count > 0)
@@ -242,11 +289,11 @@ namespace MSpaceInvaders
                         {
                             lives = lives + gifts[i].amount;
                         }
-                        else if (gifts[i].type == UpgradeType.max_bullets)
+                        else if (gifts[i].type == UpgradeType.max_bullets && nbrBullets<=10)
                         {
                             nbrBullets = nbrBullets + gifts[i].amount;
                         }
-                        else if (gifts[i].type == UpgradeType.proj_speed)
+                        else if (gifts[i].type == UpgradeType.proj_speed && speedProj<=18)
                         {
                             speedProj = speedProj + gifts[i].amount;
                         }

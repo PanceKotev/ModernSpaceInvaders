@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ship5.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -192,6 +195,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\roundysh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship5_hit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

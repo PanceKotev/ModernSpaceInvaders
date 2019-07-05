@@ -18,6 +18,10 @@ namespace MSpaceInvaders
         public UpgradeType type { get; set; }
         public static Random random = new Random();
         public int amount;
+        /// <summary>
+        /// Constructor for the Upgrade class.
+        /// Randomly chooses which type of upgrade it will be.
+        /// </summary>
         public Upgrade()
         {
             int dec = random.Next(0, 3);
@@ -29,7 +33,7 @@ namespace MSpaceInvaders
             else if (dec == 1)
             {
                 type = UpgradeType.proj_speed;
-                amount = 1;
+                amount = 2;
             }
             else if (dec == 2)
             {

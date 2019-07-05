@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.enemyMovement = new System.Windows.Forms.Timer(this.components);
@@ -36,11 +37,11 @@
             this.mvRight = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbDifficulty = new System.Windows.Forms.Label();
             this.pSpeed = new System.Windows.Forms.Label();
             this.maxB = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbDifficulty = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -104,6 +105,33 @@
             this.panel1.Size = new System.Drawing.Size(624, 35);
             this.panel1.TabIndex = 2;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(302, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 22);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "0";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Paint += new System.Windows.Forms.PaintEventHandler(this.label2_Paint);
+            // 
+            // lbDifficulty
+            // 
+            this.lbDifficulty.AutoSize = true;
+            this.lbDifficulty.BackColor = System.Drawing.Color.Transparent;
+            this.lbDifficulty.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDifficulty.ForeColor = System.Drawing.Color.White;
+            this.lbDifficulty.Location = new System.Drawing.Point(161, 10);
+            this.lbDifficulty.Name = "lbDifficulty";
+            this.lbDifficulty.Size = new System.Drawing.Size(72, 16);
+            this.lbDifficulty.TabIndex = 4;
+            this.lbDifficulty.Text = "Difficulty : ";
+            this.lbDifficulty.Paint += new System.Windows.Forms.PaintEventHandler(this.lbDifficulty_Paint);
+            // 
             // pSpeed
             // 
             this.pSpeed.AutoSize = true;
@@ -142,33 +170,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // lbDifficulty
-            // 
-            this.lbDifficulty.AutoSize = true;
-            this.lbDifficulty.BackColor = System.Drawing.Color.Transparent;
-            this.lbDifficulty.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDifficulty.ForeColor = System.Drawing.Color.White;
-            this.lbDifficulty.Location = new System.Drawing.Point(161, 10);
-            this.lbDifficulty.Name = "lbDifficulty";
-            this.lbDifficulty.Size = new System.Drawing.Size(72, 16);
-            this.lbDifficulty.TabIndex = 4;
-            this.lbDifficulty.Text = "Difficulty : ";
-            this.lbDifficulty.Paint += new System.Windows.Forms.PaintEventHandler(this.lbDifficulty_Paint);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(302, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 22);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "0";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Paint += new System.Windows.Forms.PaintEventHandler(this.label2_Paint);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,6 +178,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(624, 561);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

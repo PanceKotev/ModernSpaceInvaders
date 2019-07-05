@@ -19,7 +19,14 @@ namespace MSpaceInvaders
         public int difficulty = 1;
         public Enemy leftmost { get; set; }
         public Direction enemyDirection { get; set; }
-        public Level(int width,int height,int difficulty1,int something)
+        /// <summary>
+        /// Constructor which generates a level with the variability of number of rows/columns/enemy projectile speed,
+        /// and other stuff randomly depending on the difficulty variable.
+        /// </summary>
+        /// <param name="width">The width of the form.</param>
+        /// <param name="height">The height of the form.</param>
+        /// <param name="difficulty1">The difficulty by which the level is generated.</param>
+        public Level(int width,int height,int difficulty1)
         {
             Width = width;
             Height = height;
@@ -55,6 +62,10 @@ namespace MSpaceInvaders
             rightmost = enemies[columns - 1, 0];
             leftmost = enemies[0, 0];
         }
+        /// <summary>
+        /// Draws the enemies if they are not dead.
+        /// </summary>
+        /// <param name="g">Graphics object from the form.</param>
         public void Draw(Graphics g)
         {
       
@@ -68,6 +79,9 @@ namespace MSpaceInvaders
             }
 
         }
+        /// <summary>
+        /// Moves the projectiles of the enemies.
+        /// </summary>
         public void enemyMoveProj()
         {
             for (int i = 0; i < columns; i++)
@@ -82,6 +96,9 @@ namespace MSpaceInvaders
             }
 
         }
+        /// <summary>
+        /// Updates the movement direction of the enemy matrix depending on whether they were moving right or left.
+        /// </summary>
         public void updateDir()
         {
             if (rightmost.location.X + enemies[columns - 1, 0].size.Width >= Width-rightmost.size.Width)
@@ -109,6 +126,9 @@ namespace MSpaceInvaders
             }
 
         }
+        /// <summary>
+        /// Moves the enemies depending on the variable enemyDirection.
+        /// </summary>
         public void moveEnemies()
         {
             for (int i = 0; i < columns; i++)
@@ -119,6 +139,9 @@ namespace MSpaceInvaders
                 }
             }
         }
+        /// <summary>
+        /// Decides which one of the enemies is the most right one or most left one to help with the updateDir function.
+        /// </summary>
         public void decideMost()
         {
             Enemy right=rightmost;
@@ -146,6 +169,10 @@ namespace MSpaceInvaders
             rightmost = right;
             leftmost = left;
         }
+        /// <summary>
+        /// Checks whether all the enemies in the level are dead.
+        /// </summary>
+        /// <returns>Returns true if all the enemies are dead.</returns>
         public bool allDead()
         {
             int umreni = 0;
